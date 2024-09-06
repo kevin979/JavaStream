@@ -46,3 +46,7 @@ nameList = humanList.stream()
 ```
 
 從上述範例中可以看到Stream帶來了一些方便性，讓程式碼變得比較好閱讀。
+
+## 串流(Stream)與併行流(ParallelStream)
+
+stream是單一流向的資料流，因此在操作上與一般的物件操作上並無二致，也因此當資料量較大時，有可能會導致執行時間過久，此時就可以考慮使用ParallelStream，ParallelStream是多流向的資料流，可以想像成是使用Thread的Stream，利用資源換取效能，但同時也可能會產生Thread Safe的議題，因此在使用上需格外注意。

@@ -35,3 +35,13 @@ Stream<Integer> stream = Stream.empty();
 Stream.Builder 與 Stream.of 的差異就留待各位自行探索了！
 {% endhint %}
 
+另外，Collection也可以轉換成Stream物件以及合併多個Stream(必須是同型別才能合併)
+
+```java
+// Collection to Stream (List、Set)
+Stream<Human> stream = humanList.stream();
+// 兩個Stream合併
+Stream<Integer> stream1 = Stream.of(1, 2, 3, 4, 5);
+Stream<Integer> stream2 = Stream.of(6, 7, 8, 9, 10);
+Stream<Integer> stream = Stream.concat(stream1, stream2);
+```
