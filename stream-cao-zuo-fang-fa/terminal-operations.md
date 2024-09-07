@@ -1,4 +1,18 @@
-# 終端操作
+# terminal operations
+
+## anyMatch
+
+## allMatch
+
+## noneMatch
+
+## collect
+
+## count
+
+## findAny
+
+## findFirst
 
 ## forEach
 
@@ -42,3 +56,11 @@ list.parallelStream().forEachOrdered(System.out::println);
 ```
 
 結論：當使用Stream時，不論是forEach還是forEachOrdered都會按照物件內順序依序執行，但如果是使用parallelStream時就會產生差異。
+
+## min
+
+## max
+
+## reduce
+
+## toArray

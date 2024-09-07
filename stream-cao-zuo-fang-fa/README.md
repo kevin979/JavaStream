@@ -45,3 +45,12 @@ Stream<Integer> stream1 = Stream.of(1, 2, 3, 4, 5);
 Stream<Integer> stream2 = Stream.of(6, 7, 8, 9, 10);
 Stream<Integer> stream = Stream.concat(stream1, stream2);
 ```
+
+特殊的生成方式，請盡可能不要使用！！
+
+```java
+// 無限長度的Stream
+Stream<Integer> stream = Stream.generate(() -> new Random().nextInt())
+// 無限長度的Stream，可設置停止生長的限制
+Stream<Integer> stream = Stream.iterate(1, n -> n < 25, n -> n + 1);
+```
