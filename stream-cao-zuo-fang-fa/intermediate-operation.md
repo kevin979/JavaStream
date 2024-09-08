@@ -111,10 +111,9 @@ Stream<Human> stream = humanList.stream().sorted(Comparator.comparing(Human::get
 Stream<Human> stream = humanList.stream().sorted(Comparator.comparing(Human::getName).reversed());
 ```
 
-如果今天要排序的條件有多個的情況，那一樣是可以使用Comparator實現
+如果要排序的條件有多個的情況，那一樣是可以使用Comparator實現
 
 ```java
-// 此範例就是使用多個條件進行排序
 Stream<Human> stream = humanList.stream()
         .sorted(Comparator.comparing(Human::getAge)
                 .thenComparing(Human::getHeight).reversed()
@@ -122,6 +121,35 @@ Stream<Human> stream = humanList.stream()
 ```
 
 ## peek
+
+這是一個非常特別的API，依據官方文件所述，它的存在是為了debug，而通過此API的元素其實不會被異動
+
+```java
+Stream<String> stream = Stream.of("a", "b", "c");
+stream.peek(s -> s.toLowerCase()).forEach(s -> System.out.print(s + " "));
+// 執行結果 a b c
+```
+
+如果要用來進行debug，那使用方式可參考如下
+
+```java
+List<String> list = stream.peek(s -> System.out.println("element = " + s))
+        .map(String::toUpperCase)
+        .peek(s -> System.out.println("new element = " + s))
+        .collect(Collectors.toList());
+/** 執行結果如下
+element = a
+new element = A
+element = b
+new element = B
+element = c
+new element = C
+**/
+```
+
+但，peek真的無法改變元素內容嗎？
+
+
 
 ## limit
 
