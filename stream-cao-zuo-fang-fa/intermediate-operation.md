@@ -149,7 +149,23 @@ new element = C
 
 但，peek真的無法改變元素內容嗎？
 
+```java
+List<Receipt> receiptList = getReceiptList();
+List<Receipt> newReceiptList = receiptList.stream()
+    .peek(receipt -> receipt.setReceiptID(receipt.getReceiptID().concat("-C")))
+    .peek(receipt -> receipt.setAmount(receipt.getAmount().add(BigDecimal.TEN)))
+    .collect(Collectors.toList());
+newReceiptList.forEach(System.out::println);
+/** 結果
+Receipt{receiptID='A0000001-C', receiptDate=2024-09-08, amount=110}
+Receipt{receiptID='A0000002-C', receiptDate=2024-09-08, amount=369}
+Receipt{receiptID='A0000003-C', receiptDate=2024-09-08, amount=792}
+**/
+```
 
+{% hint style="info" %}
+為什麼上面字串轉大寫沒效，但使用物件改資料卻可以生效？？？
+{% endhint %}
 
 ## limit
 

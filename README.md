@@ -6,20 +6,21 @@ Stream是為了方便資料處理(排序、運算、整合...等等)，它有許
 
 首先，來看一下以下範例，Stream簡化後的程式碼長怎樣。
 
-<pre class="language-java"><code class="lang-java">// 篩選出年紀大於18歲且身高超過180公分，且BMI介於15~24之間的人
+```java
+// 篩選出年紀大於18歲且身高超過180公分，且BMI介於15~24之間的人
 // 並且依照年紀排序後取出姓名
-List&#x3C;Human> humanList = humanDao.findAll();
-List&#x3C;Human> newHumanList = new ArrayList&#x3C;>();
-<strong>List&#x3C;String> nameList = new ArrayList&#x3C;>();
-</strong>for (Human human : humanList) {
+List<Human> humanList = humanDao.findAll();
+List<Human> newHumanList = new ArrayList<>();
+List<String> nameList = new ArrayList<>();
+for (Human human : humanList) {
     if (human.getAge() >= 18
-            &#x26;&#x26; human.getHeight() >= 180f
-            &#x26;&#x26; human.getBMI().compareTo(new BigDecimal("15")) >= 0
-            &#x26;&#x26; human.getBMI().compareTo(new BigDecimal("24")) &#x3C;= 0) {
+            && human.getHeight() >= 180f
+            && human.getBMI().compareTo(new BigDecimal("15")) >= 0
+            && human.getBMI().compareTo(new BigDecimal("24")) <= 0) {
         newHumanList.add(human);
     }
 }
-newHumanList.sort(new Comparator&#x3C;Human>() {
+newHumanList.sort(new Comparator<Human>() {
     @Override
     public int compare(Human o1, Human o2) {
         return o1.getAge() - o2.getAge();
@@ -28,7 +29,7 @@ newHumanList.sort(new Comparator&#x3C;Human>() {
 for (Human human : newHumanList) {
     nameList.add(human.getName());
 }
-</code></pre>
+```
 
 讓我們使用Stream來改寫上述的邏輯吧
 
