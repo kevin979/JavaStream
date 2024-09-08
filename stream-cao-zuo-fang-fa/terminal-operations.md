@@ -1,5 +1,9 @@
 # terminal operations
 
+## 官方定義
+
+Terminal operations, such as `Stream.forEach` or `IntStream.sum`, may traverse the stream to produce a result or a side-effect. After the terminal operation is performed, the stream pipeline is considered consumed, and can no longer be used; if you need to traverse the same data source again, you must return to the data source to get a new stream. In almost all cases, terminal operations are _eager_, completing their traversal of the data source and processing of the pipeline before returning.&#x20;
+
 ## anyMatch
 
 ## allMatch
