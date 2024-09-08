@@ -150,7 +150,11 @@ new element = C
 但，peek真的無法改變元素內容嗎？
 
 ```java
-List<Receipt> receiptList = getReceiptList();
+List<Receipt> receiptList = List.of(
+    new Receipt("A0000001", LocalDate.now(), new BigDecimal("100")),
+    new Receipt("A0000002", LocalDate.now(), new BigDecimal("359")),
+    new Receipt("A0000003", LocalDate.now(), new BigDecimal("782"))
+);
 List<Receipt> newReceiptList = receiptList.stream()
     .peek(receipt -> receipt.setReceiptID(receipt.getReceiptID().concat("-C")))
     .peek(receipt -> receipt.setAmount(receipt.getAmount().add(BigDecimal.TEN)))
@@ -169,6 +173,28 @@ Receipt{receiptID='A0000003-C', receiptDate=2024-09-08, amount=792}
 
 ## limit
 
+指定資料筆數
+
+```java
+List<Integer> list = List.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+list.stream().limit(3).forEach(i -> System.out.print(i + " "));
+//結果 0 1 2
+```
+
+{% hint style="info" %}
+如果limit指定的數字大於Stream的元素數量會發生什麼事？
+{% endhint %}
+
 ## skip
 
-###
+跳過指定資料筆數
+
+```java
+List<Integer> list = List.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+list.stream().skip(3).forEach(i -> System.out.print(i + " "));
+//結果 3 4 5 6 7 8 9
+```
+
+{% hint style="info" %}
+limit 是取得指定筆數，而skip是跳過指定筆數，如果兩個合用會發生什麼變化呢？
+{% endhint %}
