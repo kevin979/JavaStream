@@ -6,9 +6,48 @@ Terminal operations, such as `Stream.forEach` or `IntStream.sum`, may traverse t
 
 ## anyMatch
 
+如同字義上描述，只要在Stream中任一元素符合所陳述之條件，就視為true，反之全部都不符合就視為false，以下範例確認資料中是否有價格大於500元的發票
+
+```java
+List<Receipt> receiptList = List.of(
+        new Receipt("A0000001", LocalDate.now(), new BigDecimal("100")),
+        new Receipt("A0000002", LocalDate.now(), new BigDecimal("359")),
+        new Receipt("A0000003", LocalDate.now(), new BigDecimal("782"))
+);
+boolean hasPriceGreater500 = receiptList.stream()
+        .anyMatch(receipt -> receipt.getAmount().compareTo(new BigDecimal("500")) > 0);
+//結果 true
+```
+
 ## allMatch
 
+如同字義上描述，必須是Stream中的所有元素都符合條件，就視為true，若只要有一個元素不符合條件則視為false，以下範例確認資料中是否所有發票價格都大於500元
+
+```java
+List<Receipt> receiptList = List.of(
+        new Receipt("A0000001", LocalDate.now(), new BigDecimal("100")),
+        new Receipt("A0000002", LocalDate.now(), new BigDecimal("359")),
+        new Receipt("A0000003", LocalDate.now(), new BigDecimal("782"))
+);
+boolean hasPriceGreater500 = receiptList.stream()
+        .allMatch(receipt -> receipt.getAmount().compareTo(new BigDecimal("500")) > 0);
+//結果 false
+```
+
 ## noneMatch
+
+如同字義上描述，必須是Stream中的所有元素都沒有符合條件，就視為true，若只要有一個元素符合條件則視為false(其實就等同是`anyMatch`的反義詞)
+
+```java
+List<Receipt> receiptList = List.of(
+        new Receipt("A0000001", LocalDate.now(), new BigDecimal("100")),
+        new Receipt("A0000002", LocalDate.now(), new BigDecimal("359")),
+        new Receipt("A0000003", LocalDate.now(), new BigDecimal("782"))
+);
+boolean hasPriceGreater500 = receiptList.stream()
+        .noneMatch(receipt -> receipt.getAmount().compareTo(new BigDecimal("500")) > 0);
+//結果 false
+```
 
 ## collect
 
