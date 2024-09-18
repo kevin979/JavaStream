@@ -6,7 +6,7 @@ Intermediate operations return a new stream. They are always _lazy_; executing a
 
 ## filter
 
-依據條件過濾Stream內容
+* 依據條件過濾Stream內容
 
 ```java
 // 在filter中撰寫條件
@@ -29,11 +29,7 @@ humanList.stream()
 
 ## map
 
-* mapToDouble
-* mapToInt
-* mapToLong
-
-取出映射的值
+* map是用來取出映射的值，在操作上可分為map、mapToDouble、mapToInt、mapToLong，可使用通用型別或指定型別，常用為map，其他類型則較為少用。
 
 ```java
 // 利用mapToInt取出年紀的資料
@@ -54,11 +50,7 @@ Stream<Human> stream = humanList.stream().map(human -> {
 
 ## flatMap
 
-* flatMapToDouble
-* flatMapToInt
-* flatMapToLong
-
-將二維陣列平壓重整成一維串流
+* flatMap是將二維陣列平壓重整成一維串流，在操作上可分為flatMap、flatMapToDouble、flatMapToInt、flatMapToLong，可使用通用型別或指定型別，常用為flatMap，其他類型則較為少用。
 
 ```java
 List<Integer> list1 = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
@@ -70,7 +62,7 @@ list.stream().flatMap(Collection::stream).forEach(e -> System.out.print(e + " ")
 // 1 2 3 4 5 6 7 8 9 100 101 102 103 104 105 106 107 108 109 200 201 202 203 204 205 206 207 208 209
 ```
 
-因為flatMap是將二維陣列進行平壓重整，因此在重整過程中是可以針對資料進行加工
+* 因為flatMap是將二維陣列進行平壓重整，因此在重整過程中是可以針對資料進行加工
 
 ```java
 List<Integer> list1 = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
@@ -87,7 +79,7 @@ list.stream().flatMap(ll -> ll.stream().map(i -> {
 
 ## distinct
 
-將重複資料過濾後，保留一筆
+* 將重複資料過濾後，保留一筆
 
 <pre class="language-java"><code class="lang-java"><strong>// 先產生一個Stream，裡面有多筆資料，然後有重複資料
 </strong>Stream&#x3C;Integer> stream = Stream.of(0, 1, 2, 3, 4, 5, 4, 3, 2, 1, 0);
@@ -102,7 +94,7 @@ distinct是利用hashCode() & equals()進行物件比對，如果Stream內的物
 
 ## sorted
 
-排序時會需要指定欄位、排序方式(升冪、降冪)，因此Stream在sorted設計上是使用Comparator來實現(當然List的sort也是使用Comparator進行實現)
+* 排序時會需要指定欄位、排序方式(升冪、降冪)，因此Stream在sorted設計上是使用Comparator來實現(當然List的sort也是使用Comparator進行實現)
 
 ```java
 // 依據姓名進行排序，預設是升冪
@@ -111,7 +103,7 @@ Stream<Human> stream = humanList.stream().sorted(Comparator.comparing(Human::get
 Stream<Human> stream = humanList.stream().sorted(Comparator.comparing(Human::getName).reversed());
 ```
 
-如果要排序的條件有多個的情況，那一樣是可以使用Comparator實現
+* 如果要排序的條件有多個的情況，那一樣是可以使用Comparator實現
 
 ```java
 Stream<Human> stream = humanList.stream()
@@ -122,7 +114,7 @@ Stream<Human> stream = humanList.stream()
 
 ## peek
 
-這是一個非常特別的API，依據官方文件所述，它的存在是為了debug，而通過此API的元素其實不會被異動
+* 這是一個非常特別的API，依據官方文件所述，它的存在是為了debug，而通過此API的元素其實不會被異動
 
 ```java
 Stream<String> stream = Stream.of("a", "b", "c");
@@ -130,7 +122,7 @@ stream.peek(s -> s.toLowerCase()).forEach(s -> System.out.print(s + " "));
 // 執行結果 a b c
 ```
 
-如果要用來進行debug，那使用方式可參考如下
+* 如果要用來進行debug，那使用方式可參考如下
 
 ```java
 List<String> list = stream.peek(s -> System.out.println("element = " + s))
@@ -173,7 +165,7 @@ Receipt{receiptID='A0000003-C', receiptDate=2024-09-08, amount=792}
 
 ## limit
 
-指定資料筆數
+* 指定資料筆數
 
 ```java
 List<Integer> list = List.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
@@ -187,7 +179,7 @@ list.stream().limit(3).forEach(i -> System.out.print(i + " "));
 
 ## skip
 
-跳過指定資料筆數
+* 跳過指定資料筆數
 
 ```java
 List<Integer> list = List.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
