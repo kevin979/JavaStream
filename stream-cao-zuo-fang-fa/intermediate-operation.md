@@ -6,7 +6,7 @@ Intermediate operations return a new stream. They are always _lazy_; executing a
 
 ## filter
 
-* 依據條件過濾Stream內容
+* Filter 是用來根據條件過濾 Stream 的內容。
 
 ```java
 // 在filter中撰寫條件
@@ -36,7 +36,7 @@ humanList.stream()
 IntStream intStream = humanList.stream().mapToInt(Human::getAge);
 ```
 
-map功能不僅僅只有取值，也可以利用map進行數值調整
+* map功能不僅僅只有取值，也可以利用map進行數值調整
 
 ```java
 // 將身高大於180的人，年紀調整為18
@@ -139,7 +139,7 @@ new element = C
 **/
 ```
 
-但，peek真的無法改變元素內容嗎？
+* peek真的無法改變元素內容嗎？
 
 ```java
 List<Receipt> receiptList = List.of(
