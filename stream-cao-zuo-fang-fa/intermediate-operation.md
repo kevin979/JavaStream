@@ -125,17 +125,27 @@ stream.peek(s -> s.toLowerCase()).forEach(s -> System.out.print(s + " "));
 * 如果要用來進行debug，那使用方式可參考如下
 
 ```java
-List<String> list = stream.peek(s -> System.out.println("element = " + s))
-        .map(String::toUpperCase)
-        .peek(s -> System.out.println("new element = " + s))
-        .collect(Collectors.toList());
+stream.peek(s -> {
+            System.out.println("element = " + s);
+            s = s.toUpperCase();
+            System.out.println("new element = " + s);
+            s = s.concat("_0");
+            System.out.println("new element = " + s);
+        })
+        .forEach(System.out::println);
 /** 執行結果如下
 element = a
 new element = A
+new element = A_0
+a
 element = b
 new element = B
+new element = B_0
+b
 element = c
 new element = C
+new element = C_0
+c
 **/
 ```
 
@@ -147,11 +157,10 @@ List<Receipt> receiptList = List.of(
     new Receipt("A0000002", LocalDate.now(), new BigDecimal("359")),
     new Receipt("A0000003", LocalDate.now(), new BigDecimal("782"))
 );
-List<Receipt> newReceiptList = receiptList.stream()
+receiptList.stream()
     .peek(receipt -> receipt.setReceiptID(receipt.getReceiptID().concat("-C")))
     .peek(receipt -> receipt.setAmount(receipt.getAmount().add(BigDecimal.TEN)))
-    .collect(Collectors.toList());
-newReceiptList.forEach(System.out::println);
+    forEach(System.out::println);
 /** 結果
 Receipt{receiptID='A0000001-C', receiptDate=2024-09-08, amount=110}
 Receipt{receiptID='A0000002-C', receiptDate=2024-09-08, amount=369}
@@ -160,7 +169,7 @@ Receipt{receiptID='A0000003-C', receiptDate=2024-09-08, amount=792}
 ```
 
 {% hint style="info" %}
-為什麼上面字串轉大寫沒效，但使用物件改資料卻可以生效？？？
+為什麼上面字串操作無法真正改變元素，但使用物件後元素卻可以被改變？？？
 {% endhint %}
 
 ## limit
