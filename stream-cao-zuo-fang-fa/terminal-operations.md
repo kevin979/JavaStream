@@ -148,4 +148,28 @@ list.parallelStream().forEachOrdered(System.out::println);
 
 ## reduce
 
-## toArray
+* 在Stream中進行聚合，與前面的find查找資料；min、count計算資料等方法是不一樣的，開發人員可以在reduce中進行計算並返回結果(返回的結果同樣是Optional)
+
+```java
+Stream<Integer> stream = Stream.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+Integer result = stream.reduce((res, i) -> res * i).orElse(0);
+System.out.println(result);
+
+//結果 3628800
+```
+
+* reduce在使用上可以給予起始值，像上面的案例是沒有起始值的，在起始值的情況下reduce會使用第一個元素作為起始值，下面的案例就賦予一個起始值 `-1`&#x20;
+
+```java
+Stream<Integer> stream = Stream.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+Integer result = stream.reduce(-1, (res, i) -> res * i);
+System.out.println(result);
+
+//結果 -3628800
+```
+
+{% hint style="info" %}
+起始值是否賦予的情況下，除了結果不一樣之外，還有什麼差異呢？
+{% endhint %}
