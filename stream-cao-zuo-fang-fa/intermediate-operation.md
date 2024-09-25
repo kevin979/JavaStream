@@ -27,6 +27,13 @@ humanList.stream()
 以上兩種寫法效果一樣，但真的沒有差異或影響嗎？
 {% endhint %}
 
+* 當有一些特殊狀況時，可以在filter中寫三元運算子
+
+```java
+humanList.stream()
+        .filter(age != null ? human -> human.getAge() >= age : human -> true)
+```
+
 ## map
 
 * map是用來取出映射的值，在操作上可分為map、mapToDouble、mapToInt、mapToLong，可使用通用型別或指定型別，常用為map，其他類型則較為少用。
@@ -81,12 +88,13 @@ list.stream().flatMap(ll -> ll.stream().map(i -> {
 
 * 將重複資料過濾後，保留一筆
 
-<pre class="language-java"><code class="lang-java"><strong>// 先產生一個Stream，裡面有多筆資料，然後有重複資料
-</strong>Stream&#x3C;Integer> stream = Stream.of(0, 1, 2, 3, 4, 5, 4, 3, 2, 1, 0);
+```java
+// 先產生一個Stream，裡面有多筆資料，然後有重複資料
+Stream<Integer> stream = Stream.of(0, 1, 2, 3, 4, 5, 4, 3, 2, 1, 0);
 // 使用distinct後
 stream.distinct().forEach(e -> System.out.print(e + " "));
 // 結果0 1 2 3 4 5
-</code></pre>
+```
 
 {% hint style="info" %}
 distinct是利用hashCode() & equals()進行物件比對，如果Stream內的物件你沒有實作hashCode() & equals()會發生什麼事？抑或是hashCode() & equals()你的實作內容沒有納入所有屬性會發生什麼事？
